@@ -19,7 +19,10 @@ public class PostBLM extends BaseBLM {
     super(pvBaseRequestBean);
     // TODO Auto-generated constructor stub
   }
-
+  
+  public PostBLM() {
+    
+  }
   @Override
   public void DoDao() {
     // TODO Auto-generated method stub

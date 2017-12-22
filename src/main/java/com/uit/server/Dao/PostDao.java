@@ -73,7 +73,11 @@ public class PostDao extends BaseDao {
   public List AllPostOfUser(int userID) {
     List Result =  new Vector();
     
-    String strSql = "SELECT ID , IDUSER, DETAIL, DATECREATE, IDFELL  FROM STATUS WHERE IDUSER=? ";
+    String strSql = "SELECT DISTINCT ID , IDUSER, DETAIL, DATECREATE, IDFELL "
+        + " FROM STATUS "
+        + "WHERE IDUSER=? "
+        + "GROUP BY IDUSER"
+        + "ORDER BY DATECREATE ASC ";
     try {
       mvConn = BASEConnection();
       mvPreparedStatement = mvConn.prepareStatement(strSql);
@@ -110,7 +114,9 @@ public class PostDao extends BaseDao {
         + " STT.DATECREATE,"
         + " STT.IDFELL "
         + "FROM STATUS STT INNER JOIN SOUSERINFO US ON (STT.IDUSER = US.IDUSER) "
-        + "WHERE STT.IDUSER IN(SELECT UF.BEIDUSER FROM USERFOLLOW UF WHERE UF.IDUSER = ? ) ";
+        + "WHERE STT.IDUSER IN(SELECT UF.BEIDUSER FROM USERFOLLOW UF WHERE UF.IDUSER = ? )"
+        + " GROUP BY STT.ID "
+        + " ORDER BY STT.DATECREATE ASC ";
     try {
       mvConn = BASEConnection();
       mvPreparedStatement = mvConn.prepareStatement(strSql);

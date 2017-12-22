@@ -16,6 +16,9 @@ public class BaseDao {
   private String dbms;
   private String portNumber;
   private String dbName;
+  
+  public Connection mvConn;
+  public PreparedStatement mvPreparedStatement;
 
 
   public BaseDao() {

@@ -22,5 +22,7 @@ public abstract class BaseBLM {
     
   }
   
+  public BaseBLM() {}
+  
   public abstract void DoDao();
 }
