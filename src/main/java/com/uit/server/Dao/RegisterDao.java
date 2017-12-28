@@ -29,7 +29,7 @@ public class RegisterDao extends BaseDao {
   }
   
   public int CreateUserRigister(String userName, String password) {
-    String strSql = "INSERT INTO SOUSERRIGISTER('USERNAME','PASSWORD') VALUES(?,?)";
+    String strSql = "INSERT INTO `souserrigister`( `USERNAME`, `PASSWORD`) VALUES (?,?)";
     try {
      this.mvConn =  BASEConnection();
      this.mvPreparedStatement = mvConn.prepareStatement(strSql,Statement.RETURN_GENERATED_KEYS );

@@ -11,7 +11,7 @@ pipeline {
 					mvn install
 					mvn clean
 					mvn deploy
-                    java -jar target/Itrade-0.0.1-SNAPSHOT-fat.jar & 
+                    java -jar target/SocialNetworkSPlaces-0.0.1-SNAPSHOT.jar 
 		}
 		input message: 'Shutdown Webtrade (Force to stop now)?'
             }

@@ -9,6 +9,8 @@ public class NewPlaceRequestBean extends BaseRequestBean {
   private int IDTypePlace;
   private String NameTypePlace;
   private String Note;
+  private String PhoneNumber;
+  private String Email;
   public float getLocationX() {
     return LocationX;
   }
@@ -56,6 +58,18 @@ public class NewPlaceRequestBean extends BaseRequestBean {
   }
   public void setNote(String note) {
     Note = note;
+  }
+  public String getPhoneNumber() {
+    return PhoneNumber;
+  }
+  public void setPhoneNumber(String phoneNumber) {
+    PhoneNumber = phoneNumber;
+  }
+  public String getEmail() {
+    return Email;
+  }
+  public void setEmail(String email) {
+    Email = email;
   }
   
 }

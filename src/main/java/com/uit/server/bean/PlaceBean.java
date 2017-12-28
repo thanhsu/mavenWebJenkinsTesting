@@ -15,6 +15,7 @@ public class PlaceBean {
   private ReviewBean[] lstReview;
   private LikerBean[] lstLike;
   private ImageBean[] lstImage;
+  private boolean isLike = false;
 
 
   public String getLocationX() {
@@ -127,5 +128,13 @@ public class PlaceBean {
 
   public void setEmail(String email) {
     Email = email;
+  }
+
+  public boolean isLike() {
+    return isLike;
+  }
+
+  public void setLike(boolean isLike) {
+    this.isLike = isLike;
   }
 }

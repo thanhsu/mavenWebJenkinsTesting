@@ -93,7 +93,8 @@ public class ReviewDao extends BaseDao {
     List Result = new Vector();
 
     String strSql = "SELECT CMT.ID," + "CMT.IDIMAGE," + " CMT.IDUSER," + "US.FIRSTNAMEM," + "US.LASTNAME, " + "CMT.IDREVIEW,"
-        + " CMT.VALUE AS DETAILCOMMENT," + "CMT.DATECREATE " + "FROM USERCOMMENT CMT INNER JOIN SOUSERINFO US ON (US.IDUSER = CMT.IDUSER)"
+        + " CMT.VALUE AS DETAILCOMMENT," + "CMT.DATECREATE " + ""
+            + "FROM USERCOMMENT CMT INNER JOIN SOUSERINFO US ON (US.IDUSER = CMT.IDUSER)"
         + " WHERE CMT.IDREVIEW = ?";
 
     try {

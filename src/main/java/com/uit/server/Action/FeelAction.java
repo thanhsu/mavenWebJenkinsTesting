@@ -18,6 +18,6 @@ public class FeelAction extends BaseAction {
     TypeFeelBLM mvFeelBLm =  new TypeFeelBLM();
     
     ResultBean Result = new ResultBean(1, "Danh sách feel", mvFeelBLm.AllTypeFeel());
-    this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json").end(Json.encodePrettily(Result));
+    this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8").end(Json.encodePrettily(Result));
   }
 }

@@ -35,25 +35,31 @@ public class loginDao extends BaseDao {
     }
   }
 
-  public boolean checkLogin(String pvUserName, String Password) {
+  public int checkLogin(String pvUserName, String Password) {
     Connection lvConnection = null;
     PreparedStatement lvStatement = null;
     int i = 0;
     try {
-      String lvStrSql = "SELECT COUNT(*) FROM " + USERLOGGINTABLE;
-
+      String lvStrSql = "SELECT US.ID AS IDUSER FROM " + USERLOGGINTABLE + " US "
+          + "WHERE US.USERNAME = ? AND US.PASSWORD =?  ";
       lvConnection = this.BASEConnection();
-
       lvStatement = lvConnection.prepareStatement(lvStrSql);
-
-      i = lvStatement.executeQuery().getInt(0);
+      lvStatement.setString(1, pvUserName);
+      lvStatement.setString(2, Password);
+      ResultSet resultSet =  lvStatement.executeQuery();
+      if(resultSet!=null) {
+        while(resultSet.next()) {
+          i = resultSet.getInt("IDUSER");
+        }
+      }
+      
     } catch (SQLException e) {
       i = 0;
     } finally {
       this.closeStatement(lvStatement);
       this.closeConnection(lvConnection);
     }
-    return i > 0 ? true : false;
+    return i;
   }
 
 

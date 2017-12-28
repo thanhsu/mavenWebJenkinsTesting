@@ -2,7 +2,7 @@ package com.uit.server.bean;
 
 import io.vertx.ext.web.RoutingContext;
 
-public class UserBean extends BaseRequestBean {
+public class UserBean {
   public static String USERNAME = "UserName";
   public static String PASSWORD = "Password";
   public static String TOKEN = "Token";
@@ -10,10 +10,10 @@ public class UserBean extends BaseRequestBean {
   public static String LASTNAME = "LastName";
   public static String YEARBORN = "BirthYear";
   public static String EMAIL = "Email";
-  public static String AVATARID= "Avatar";
-  public static String USERID ="UserID";
-  public static String PHONENUMBER ="PhoneNumber";
-  
+  public static String AVATARID = "Avatar";
+  public static String USERID = "UserID";
+  public static String PHONENUMBER = "PhoneNumber";
+
   private String mvUsername;
   private String mvPassword;
   private String mvToken;
@@ -24,8 +24,8 @@ public class UserBean extends BaseRequestBean {
   private int mvAvartarID;
   private int mvUserID;
   private String mvPhoneNumber;
-  
-  
+
+
   public String getMvUsername() {
     return mvUsername;
   }
@@ -50,34 +50,11 @@ public class UserBean extends BaseRequestBean {
     this.mvToken = mvToken;
   }
 
-  
 
-  public UserBean(RoutingContext pvRoutingContext) {
-    super(pvRoutingContext);
-    // TODO Auto-generated constructor stub
-  }
 
   public UserBean() {
     super();
     // TODO Auto-generated constructor stub
-  }
-
-  public UserBean getBodyLoginRequest() {
-    mvUsername = this.mvRoutingContext.getBodyAsJson().getString(USERNAME);
-    mvPassword = this.mvRoutingContext.getBodyAsJson().getString(PASSWORD);
-    mvToken = this.mvRoutingContext.getBodyAsJson().getString(TOKEN);
-    return this;
-  }
-  
-  public UserBean getRegisterRequest() {
-    mvUsername = this.mvRoutingContext.getBodyAsJson().getString(USERNAME);
-    mvPassword = this.mvRoutingContext.getBodyAsJson().getString(PASSWORD);
-    mvFirstName = this.mvRoutingContext.getBodyAsJson().getString(FIRSTNAME);
-    mvLastName =  this.mvRoutingContext.getBodyAsJson().getString(LASTNAME);
-    mvYearBorn = this.mvRoutingContext.getBodyAsJson().getString(YEARBORN);
-    mvEmail = this.mvRoutingContext.getBodyAsJson().getString(EMAIL);
-    
-    return this;
   }
 
   public String getMvFirstName() {
@@ -136,6 +113,6 @@ public class UserBean extends BaseRequestBean {
     this.mvPhoneNumber = mvPhoneNumber;
   }
 
- 
+
 
 }

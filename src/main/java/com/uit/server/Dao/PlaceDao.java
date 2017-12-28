@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
@@ -14,14 +16,14 @@ public class PlaceDao extends BaseDao {
   public static String GROUPPLACE = "GROUPPLACE";
 
 
-  public List SearchPlaceByName(PlaceRequestBean pvPlaceRequestBean) {
+  public List SearchPlaceByName(PlaceRequestBean pvPlaceRequestBean, int idplace) {
     List Result = new Vector();
 
     String strSql = "SELECT PL.ID AS IDPLACE," + " PL.NAME AS NAMEPLACE, PL.IDTYPEPLACE, " + "PL.DECRIPSION,PL.PHONENUMBER, PL.EMAIL, LO.LOCATIONX, "
         + "LO.ID AS IDLOCATION, GR.DESCRIPTION AS NAMETYPEPLACE, " + "LO.LOCATIONY, LO.IDTYPEPLACE AS IDTYPELOCATION ,"
         + " LO.IDGROUP AS IDGROUPLOCATION , " + "GRLO.NAMEGR AS NAMEGROUPLOCATION" + "  FROM "
         + "PLACE PL INNER JOIN groupplace GR ON (PL.IDGROUPPLACE = GR.ID) " + " INNER JOIN LOCATION LO ON (PL.IDLOCATION = LO.ID) "
-        + " INNER JOIN GROUPLOCATION GRLO ON (LO.IDGROUP = GRLO.ID) " + "" + " WHERE 1=1  ";
+        + " INNER JOIN GROUPLOCATION GRLO ON (LO.IDGROUP = GRLO.ID) " + "" + " WHERE  ";
     if (!pvPlaceRequestBean.getNamePlace().equals("")) {
       strSql += " AND PL.NAME LIKE '%" + pvPlaceRequestBean.getNamePlace() + "%' ";
     }
@@ -33,6 +35,8 @@ public class PlaceDao extends BaseDao {
           + (pvPlaceRequestBean.getLocationX() + 50) + " ) AND (LO.LOCATIONY BETWEEN " + (pvPlaceRequestBean.getLocationY() - 50) + " AND  "
           + (pvPlaceRequestBean.getLocationY() + 50) + " )";
 
+    } if(idplace!=0) {
+      strSql +=" AND (PL.ID = "+idplace+" ) ";
     }
     try {
       Connection conn = BASEConnection();
@@ -131,10 +135,60 @@ public class PlaceDao extends BaseDao {
     return null;
   
   }
+  
+  public int createNewLocation(float x, float y, int idtypelocation) {
+    String strSQL = "INSERT INTO `location`( `LOCATIONX`, `LOCATIONY`, `NOTE`, `IDGROUP`) VALUES (?,?,?,?)";
+    try {
+      mvConn = BASEConnection();
+      mvPreparedStatement = mvConn.prepareStatement(strSQL, Statement.RETURN_GENERATED_KEYS);
+      mvPreparedStatement.setFloat(1, x);
+      mvPreparedStatement.setFloat(2, y);
+      mvPreparedStatement.setString(3, Calendar.getInstance().toString());
+      mvPreparedStatement.setInt(4, idtypelocation);
+      
+      if(mvPreparedStatement.executeUpdate()>0) {
+        try(ResultSet rs =  mvPreparedStatement.getGeneratedKeys()){
+          if(rs.next()) {
+            return rs.getInt(1);
+          }
+        }
+      }
+    }catch(SQLException e) {
+      e.printStackTrace();
+    }finally {
+      this.closeConnection(mvConn);
+      this.closeStatement(mvPreparedStatement);
+    }
+    return 0;
+  }
 
-  public int CreateNewPlace(String nameplace, int idTypePlace, int idlocation, String decripsion) {
-
-
+  public int CreateNewPlace(String nameplace, int idTypePlace, int idlocation, String decripsion, String phoneNumber, String Email) {
+    String strSQL=" INSERT INTO `place`(`NAME`, `DECRIPSION`, "
+        + "`IDLOCATION`, `IDGROUPPLACE`, "
+        + " `PHONENUMBER`, `EMAIL`) VALUES (?,?,?,?,?,?)";
+    try {
+      mvConn = BASEConnection();
+      mvPreparedStatement = mvConn.prepareStatement(strSQL, Statement.RETURN_GENERATED_KEYS);
+      mvPreparedStatement.setString(1, nameplace);
+      mvPreparedStatement.setString(2, decripsion);
+      mvPreparedStatement.setInt(3, idlocation);
+      mvPreparedStatement.setInt(4, idTypePlace);
+      mvPreparedStatement.setString(5, phoneNumber);
+      mvPreparedStatement.setString(6, Email);
+      
+      if(mvPreparedStatement.executeUpdate()>0) {
+        try(ResultSet rs =  mvPreparedStatement.getGeneratedKeys()){
+          if(rs.next()) {
+            return rs.getInt(1);
+          }
+        }
+      }
+    }catch(SQLException e) {
+      e.printStackTrace();
+    }finally {
+      this.closeConnection(mvConn);
+      this.closeStatement(mvPreparedStatement);
+    }
     return 0;
   }
 

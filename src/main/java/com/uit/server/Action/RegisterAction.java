@@ -2,7 +2,10 @@ package com.uit.server.Action;
 
 import com.uit.server.BLM.RegisterBLM;
 import com.uit.server.BLM.UserInfoBLM;
+import com.uit.server.bean.ResultNonDataBean;
 import com.uit.server.bean.UserBean;
+import io.vertx.core.http.HttpHeaders;
+import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 
 public class RegisterAction extends BaseAction {
@@ -29,7 +32,9 @@ public class RegisterAction extends BaseAction {
     mvRegisterBLM.setUserBean(userBean);
     mvRegisterBLM.DoDao();
     if(mvRegisterBLM.result>0) {
-      this.mvRoutinContext.response().end("Đăng ký thành công mời bạn đăng nhập");
+      this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8").end(Json.encodePrettily(new ResultNonDataBean(1, "Thành Công", "OK")));
+    }else {
+      this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8").end(Json.encodePrettily(new ResultNonDataBean(0, "Lỗi", "Try Again")));
     }
   }
   

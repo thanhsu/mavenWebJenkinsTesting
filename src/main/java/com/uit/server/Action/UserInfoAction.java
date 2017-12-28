@@ -1,6 +1,8 @@
 package com.uit.server.Action;
 
+import com.uit.server.BLM.RegisterBLM;
 import com.uit.server.BLM.UserInfoBLM;
+import com.uit.server.bean.ResultNonDataBean;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.json.Json;
 
@@ -21,10 +23,6 @@ public class UserInfoAction extends BaseAction {
     
   }
   
-  public void UpdateAvatar(int idAvatar, int IdUser) {
-    mvUserInfoBLm = new UserInfoBLM();
-    mvUserInfoBLm.
-  }
-  
+    
 
 }

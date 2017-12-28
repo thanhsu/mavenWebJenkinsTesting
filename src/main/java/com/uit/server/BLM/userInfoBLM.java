@@ -23,6 +23,5 @@ public class UserInfoBLM extends BaseBLM {
     mvuserDao =new UserDao();
     return mvuserDao.GetUserInfo(idUser);
   }
-  
 
 }

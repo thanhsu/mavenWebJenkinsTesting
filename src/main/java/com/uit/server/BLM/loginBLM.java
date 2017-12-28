@@ -5,20 +5,25 @@ import com.uit.server.bean.BaseRequestBean;
 import com.uit.server.bean.UserBean;
 
 public class loginBLM extends BaseBLM {
-  boolean mvLoginStatus = false;
-  public loginBLM(BaseRequestBean pvBaseRequestBean) {
-    super(pvBaseRequestBean);
-    
-  } 
+  int UserID;
+  String username;
+  String password;
+
+  public loginBLM(String user, String pass) {
+    this.username = user;
+    this.password = pass;
+
+  }
+
   @Override
   public void DoDao() {
     loginDao lvLoginDao = new loginDao();
-    UserBean user = (UserBean)mvBaseRequestBean;
-    mvLoginStatus = lvLoginDao.checkLogin(user.getMvUsername(), user.getMvPassword());
+
+    UserID = lvLoginDao.checkLogin(username, password);
   }
-  
-  public boolean getResult() {
-    return this.mvLoginStatus;
+
+  public int getResult() {
+    return this.UserID;
   }
-  
+
 }

@@ -34,7 +34,7 @@ public class SearchPlaceAction extends BaseAction {
 
     JsonObject json = this.mvRoutinContext.getBodyAsJson();
     mvPlaceName = json.getString("KeyWord") != null ? json.getString("KeyWord") : "";
-    mvSessionID = json.getString("SessionID");
+    mvSessionID = json.getString("UserID");
     mvIDTypePlace = json.getInteger("IDTypePlace") != null ? json.getInteger("IDTypePlace") : 0;
     mvLocationX = json.getFloat("LocationX") != null ? json.getFloat("LocationX") : 0;
     mvLocationY = json.getFloat("LocationY") != null ? json.getFloat("LocationY") : 0;
@@ -46,7 +46,7 @@ public class SearchPlaceAction extends BaseAction {
     request.setNamePlace(mvPlaceName);
     request.setSessionID(mvSessionID);
     mvPlaceBlm = new PlaceBLM(request);
-    PlaceBean[] result = mvPlaceBlm.getListPlace(request);
+    PlaceBean[] result = mvPlaceBlm.getListPlace(request,0);
     ResultBean ReturnValue = new ResultBean();
     if (result == null) {
       ReturnValue = new ResultBean(0, "Không tìm thấy dữ liệu được yêu cầu. Vui lòng thử lại với những dữ liệu khác", null);

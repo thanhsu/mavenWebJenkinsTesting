@@ -26,32 +26,62 @@ public class PlaceBLM extends BaseBLM {
   @Override
   public void DoDao() {}
 
-  public PlaceBean[] getListPlace(PlaceRequestBean pvPlaceRequestBean) {
+  public PlaceBean[] getListPlace(PlaceRequestBean pvPlaceRequestBean, int idplace) {
     PlaceBean[] result;
-    List mvResultSearchPlace;
-    mvResultSearchPlace = mvPlaceDao.SearchPlaceByName(pvPlaceRequestBean);
-    if (mvResultSearchPlace != null) {
-      result = new PlaceBean[mvResultSearchPlace.size()];
-      for (int i = 0; i < mvResultSearchPlace.size(); i++) {
-        HashMap lvModel = new HashMap();
-        lvModel = (HashMap) mvResultSearchPlace.get(i);
-        result[i].setNamePace(lvModel.get("NAMEPLACE").toString());
-        result[i].setTypePlace(lvModel.get("NAMETYPEPLACE").toString());
-        result[i].setEmail(lvModel.get("EMAIL").toString());
-        result[i].setPhoneNumber(lvModel.get("PHONENUMBER").toString());
-        result[i].setLocationX(lvModel.get("LOCATIONX").toString());
-        result[i].setLocationY(lvModel.get("LOCATIONY").toString());
-        result[i].setIDPlace((int) lvModel.get("IDPLACE"));
-        result[i].setIDTypePlace((int) lvModel.get("IDGROUPLOCATION"));
-        result[i].setTypeLocation(lvModel.get("NAMEGROUPLOCATION").toString());
+    if (pvPlaceRequestBean != null) {
+      List mvResultSearchPlace;
+      mvResultSearchPlace = mvPlaceDao.SearchPlaceByName(pvPlaceRequestBean, 0);
+      if (mvResultSearchPlace != null) {
+        result = new PlaceBean[mvResultSearchPlace.size()];
+        for (int i = 0; i < mvResultSearchPlace.size(); i++) {
+          HashMap lvModel = new HashMap();
+          lvModel = (HashMap) mvResultSearchPlace.get(i);
+          result[i].setNamePace(lvModel.get("NAMEPLACE").toString());
+          result[i].setTypePlace(lvModel.get("NAMETYPEPLACE").toString());
+          result[i].setEmail(lvModel.get("EMAIL").toString());
+          result[i].setPhoneNumber(lvModel.get("PHONENUMBER").toString());
+          result[i].setLocationX(lvModel.get("LOCATIONX").toString());
+          result[i].setLocationY(lvModel.get("LOCATIONY").toString());
+          result[i].setIDPlace((int) lvModel.get("IDPLACE"));
+          result[i].setIDTypePlace((int) lvModel.get("IDGROUPLOCATION"));
+          result[i].setTypeLocation(lvModel.get("NAMEGROUPLOCATION").toString());
+          //result[i].setLike(new LikeFollowBLM().CheckLikePlace(Integer.parseInt(pvPlaceRequestBean.getSessionID()), result[i].getIDPlace()));
+          result[i].setLstComment(this.getListPlaceComment(result[i].getIDPlace()));
+          result[i].setLstReview(mvReviewBlm.AllReviewBean(result[i].getIDPlace()));
+          result[i].setLstImage(this.AllImagePlace(result[i].getIDPlace()));
+          result[i].setLstLike(this.AllLikePlace(result[i].getIDPlace()));
 
-        result[i].setLstComment(this.getListPlaceComment(result[i].getIDPlace()));
-        result[i].setLstReview(mvReviewBlm.AllReviewBean(result[i].getIDPlace()));
-        result[i].setLstImage(this.AllImagePlace(result[i].getIDPlace()));
-        result[i].setLstLike(this.AllLikePlace(result[i].getIDPlace()));
-        
+        }
+        return result;
       }
-      return result;
+    } else {
+
+      List mvResultSearchPlace;
+      mvResultSearchPlace = mvPlaceDao.SearchPlaceByName(null, idplace);
+      if (mvResultSearchPlace != null) {
+        result = new PlaceBean[mvResultSearchPlace.size()];
+        for (int i = 0; i < mvResultSearchPlace.size(); i++) {
+          HashMap lvModel = new HashMap();
+          lvModel = (HashMap) mvResultSearchPlace.get(i);
+          result[i].setNamePace(lvModel.get("NAMEPLACE").toString());
+          result[i].setTypePlace(lvModel.get("NAMETYPEPLACE").toString());
+          result[i].setEmail(lvModel.get("EMAIL").toString());
+          result[i].setPhoneNumber(lvModel.get("PHONENUMBER").toString());
+          result[i].setLocationX(lvModel.get("LOCATIONX").toString());
+          result[i].setLocationY(lvModel.get("LOCATIONY").toString());
+          result[i].setIDPlace((int) lvModel.get("IDPLACE"));
+          result[i].setIDTypePlace((int) lvModel.get("IDGROUPLOCATION"));
+          result[i].setTypeLocation(lvModel.get("NAMEGROUPLOCATION").toString());
+          //result[i].setLike(new LikeFollowBLM().CheckLikePlace(Integer.parseInt(pvPlaceRequestBean.getSessionID()), result[i].getIDPlace()));
+          result[i].setLstComment(this.getListPlaceComment(result[i].getIDPlace()));
+          result[i].setLstReview(mvReviewBlm.AllReviewBean(result[i].getIDPlace()));
+          result[i].setLstImage(this.AllImagePlace(result[i].getIDPlace()));
+          result[i].setLstLike(this.AllLikePlace(result[i].getIDPlace()));
+
+        }
+        return result;
+      }
+    
     }
     return null;
   }
@@ -101,10 +131,10 @@ public class PlaceBLM extends BaseBLM {
     List listImage = mvPlaceDao.AllImagePlace(idPlace);
     if (listImage != null) {
       Result = new ImageBean[listImage.size()];
-      for(int i=0;i < listImage.size(); i++) {
-        HashMap lvModel  = (HashMap) listImage.get(i);
+      for (int i = 0; i < listImage.size(); i++) {
+        HashMap lvModel = (HashMap) listImage.get(i);
         Result[i] = new ImageBean();
-        Result[i].setImageID((int)lvModel.get("IDIMAGE"));
+        Result[i].setImageID((int) lvModel.get("IDIMAGE"));
         Result[i].setCaption(lvModel.get("CAPTION").toString());
         Result[i].setDiscription(lvModel.get("CAPTION").toString());
       }
@@ -112,22 +142,35 @@ public class PlaceBLM extends BaseBLM {
     }
     return null;
   }
-  
+
   public LikerBean[] AllLikePlace(int idPlace) {
     LikerBean[] Result;
     List listLike = mvPlaceDao.AllLikePlace(idPlace);
-    if(listLike!=null) {
+    if (listLike != null) {
       Result = new LikerBean[listLike.size()];
-      for(int i = 0 ; i <listLike.size();i++) {
-        HashMap lvModel = (HashMap)listLike.get(i);
+      for (int i = 0; i < listLike.size(); i++) {
+        HashMap lvModel = (HashMap) listLike.get(i);
         Result[i] = new LikerBean();
-        Result[i].setIDLike((int)lvModel.get("ID"));
-        Result[i].setUserFullName(lvModel.get("FIRSTNAME")+" "+lvModel.get("LASTNAME"));
-        Result[i].setUserID((int)lvModel.get("IDUSER"));
-        
+        Result[i].setIDLike((int) lvModel.get("ID"));
+        Result[i].setUserFullName(lvModel.get("FIRSTNAME") + " " + lvModel.get("LASTNAME"));
+        Result[i].setUserID((int) lvModel.get("IDUSER"));
+
       }
       return Result;
     }
     return null;
   }
+
+
+  public int CreateNewLocation(float x, float y, int idTypeLocation) {
+    mvPlaceDao = new PlaceDao();
+
+    return mvPlaceDao.createNewLocation(x, y, idTypeLocation);
+  }
+
+  public int CreateNewPlace(int idLocation, int idTypePlace, String name, String description, String phoneNumber, String Email) {
+    mvPlaceDao = new PlaceDao();
+    return mvPlaceDao.CreateNewPlace(name, idTypePlace, idLocation, description, phoneNumber, Email);
+  }
+
 }

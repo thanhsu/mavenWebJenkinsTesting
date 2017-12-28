@@ -10,6 +10,7 @@ import com.uit.server.Action.BaseAction;
 import com.uit.server.Dao.BaseDao;
 import com.uit.server.Dao.PostDao;
 import com.uit.server.bean.BaseRequestBean;
+import com.uit.server.bean.LikerBean;
 import com.uit.server.bean.PostBean;
 
 public class PostBLM extends BaseBLM {
@@ -53,6 +54,7 @@ public class PostBLM extends BaseBLM {
         Result[i].setIDStatus((int) lvModel.get("ID"));
         Result[i].setDetail(lvModel.get("DETAIL").toString());
         Result[i].setIDFeel((int) lvModel.get("IDFEEL"));
+        Result[i].setLstLike(this.AllLikePost(Result[i].getIDStatus()));
         Result[i].setDateCreate((Date) lvModel.get("DATECREATE"));
         List listImage = mvPostDao.ListAllImagePost(Result[i].getIDStatus());
         if (listImage != null) {
@@ -86,7 +88,7 @@ public class PostBLM extends BaseBLM {
         Result[i].setFullName(lvModel.get("FIRSTNAME") + " " + lvModel.get("LASTNAME"));
         Result[i].setIDUser((int) lvModel.get("IDUSER"));
         Result[i].setIDFeel((int) lvModel.get("IDFEEL"));
-
+        Result[i].setLstLike(this.AllLikePost(Result[i].getIDStatus()));
         Result[i].setDateCreate((Date) lvModel.get("DATECREATE"));
         List listImage = mvPostDao.ListAllImagePost(Result[i].getIDStatus());
         if (listImage != null) {
@@ -104,5 +106,27 @@ public class PostBLM extends BaseBLM {
     }
 
     return null;
+  }
+  
+  public LikerBean[] AllLikePost(int idPost) {      // table comment
+    mvPostDao = new PostDao();
+    List result = mvPostDao.AllLikePost(idPost);
+    LikerBean[] listLike;
+    if(result!=null) {
+      listLike = new LikerBean[result.size()];
+      for(int i = 0 ; i< result.size();i++) {
+        listLike[i] = new LikerBean();
+        HashMap  lvMode = (HashMap) result.get(i);
+        listLike[i].setIDLike((int)lvMode.get("ID"));
+        listLike[i].setUserID((int)lvMode.get("IDUSER"));
+      }
+      return listLike;
+    }
+    return null;
+  }
+  
+  public boolean LikePost(int iduser, int idpost) {
+    mvPostDao = new PostDao();
+    return mvPostDao.DolikePost(idpost, iduser);
   }
 }

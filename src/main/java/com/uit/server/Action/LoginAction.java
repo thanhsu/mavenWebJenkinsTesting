@@ -5,7 +5,10 @@ import com.uit.server.bean.BaseRequestBean;
 import com.uit.server.bean.UserBean;
 
 public class LoginAction extends BaseAction {
-
+  String  mvUsername ;
+  String mvPassword ;
+  String mvToken ;
+  
   public LoginAction() {
     super();
     
@@ -14,19 +17,22 @@ public class LoginAction extends BaseAction {
 
   @Override
   public void ProcessTxn() {
-    this.mvRequestBean = new UserBean(this.mvRoutinContext).getBodyLoginRequest();
-    loginBLM mvBLM = new loginBLM(this.mvRequestBean);
-    mvBLM.DoDao();
+    mvUsername = this.mvRoutinContext.getBodyAsJson().getString("UserName");
+    mvPassword = this.mvRoutinContext.getBodyAsJson().getString("Password");
+    mvToken = this.mvRoutinContext.getBodyAsJson().getString("Token");
+    
+    loginBLM mvBLM = new loginBLM(mvUsername, mvPassword);
+      mvBLM.DoDao();
 
-    if (mvBLM.getResult() == true) {
+    if (mvBLM.getResult() > 0) {
       this.mvResultBean.setMvCode(1);
       this.mvResultBean.setMvMessage("LOGIN SUCCESS");
       UserBean[] lst = new UserBean[1];
-      lst[0] = (UserBean)this.mvRequestBean;
-      lst[0].setMvToken(this.mvRoutinContext.session().id());
+      lst[0] = new UserBean();
+      lst[0].setMvUserID(mvBLM.getResult());
       lst[0].setMvPassword("***********");
       this.mvResultBean.setMvData(lst);
-      SessionCenter.getInstance().RegisterSession(lst[0].getMvUsername(), this.mvRoutinContext.session().id());
+      //SessionCenter.getInstance().RegisterSession(lst[0].getMvUsername(), this.mvRoutinContext.session().id());
       this.DoResponse();
     } else {
       this.mvResultBean.setMvCode(0);
@@ -39,7 +45,7 @@ public class LoginAction extends BaseAction {
 
   @Override
   public void ParseRequestBean() {
-    mvRequestBean = new UserBean(this.mvRoutinContext).getBodyLoginRequest();
+  
 
   }
   

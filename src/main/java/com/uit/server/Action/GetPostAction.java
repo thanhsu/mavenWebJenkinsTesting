@@ -10,7 +10,13 @@ import io.vertx.core.json.JsonObject;
 public class GetPostAction extends BaseAction {
   PostBLM mvPostBLM;
   public int UserID;
-
+  int code;
+  
+  public GetPostAction setCode(int pc) {
+    this.code = pc;
+    return this;
+  }
+  
   @Override
   public void ParseRequestBean() {
     // TODO Auto-generated method stub
@@ -19,13 +25,16 @@ public class GetPostAction extends BaseAction {
 
   @Override
   public void ProcessTxn() {
-    // TODO Auto-generated method stub
+    if(code==1)
+      this.GetAllPostUser();
+    else
+      this.GetAllPostFollow();
 
   }
 
   public void GetAllPostUser() {
     JsonObject json = this.mvRoutinContext.getBodyAsJson();
-    UserID = json.getInteger("UserId");
+    UserID = json.getInteger("UserID");
     mvPostBLM = new PostBLM();
     PostBean[] lstResult = mvPostBLM.ALLPostMyUser(UserID);
     
@@ -36,7 +45,7 @@ public class GetPostAction extends BaseAction {
 
   public void GetAllPostFollow() {
     JsonObject json = this.mvRoutinContext.getBodyAsJson();
-    UserID = json.getInteger("UserId");
+    UserID = json.getInteger("UserID");
     mvPostBLM = new PostBLM();
     PostBean[] lstResult = mvPostBLM.AllPostFollow(UserID);
     

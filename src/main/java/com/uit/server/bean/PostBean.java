@@ -7,6 +7,7 @@ public class PostBean {
   private String Detail;
   private int IDFeel;
   private int[] lstImage;
+  private LikerBean[] lstLike;
   private java.util.Date DateCreate;
   public int getIDStatus() {
     return IDStatus;
@@ -49,6 +50,12 @@ public class PostBean {
   }
   public void setDateCreate(java.util.Date dateCreate) {
     DateCreate = dateCreate;
+  }
+  public LikerBean[] getLstLike() {
+    return lstLike;
+  }
+  public void setLstLike(LikerBean[] lstLike) {
+    this.lstLike = lstLike;
   }
   
   
