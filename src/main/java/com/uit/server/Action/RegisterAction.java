@@ -40,7 +40,7 @@ public class RegisterAction extends BaseAction {
   
   public void checkUsername(String username) {
     mvRegisterBLM = new RegisterBLM();
-    this.mvRoutinContext.response().end(mvRegisterBLM.checkUsername(username));
+    this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8").end(mvRegisterBLM.checkUsername(username));
   }
   
 }

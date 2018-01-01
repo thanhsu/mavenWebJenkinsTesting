@@ -10,6 +10,7 @@ import io.vertx.demo.utils.WTradeRequest;
 import javolution.util.FastMap;
 import com.uit.server.Action.BaseAction;
 import com.uit.server.Action.CheckSesionAction;
+import com.uit.server.Action.CheckUserName;
 import com.uit.server.Action.DoLikeStatusAction;
 import com.uit.server.Action.FollowUserAction;
 import com.uit.server.Action.GetPostAction;
@@ -41,6 +42,7 @@ public class DBVerticle extends AbstractVerticle {
      mvIncommingWorkflow.put(Tag.LOGIN_ACTION, new LoginAction());
      mvIncommingWorkflow.put(Tag.SEARCHPLACE_ACTION, new SearchPlaceAction());
      mvIncommingWorkflow.put(Tag.RIGISTER_ACTION, new RegisterAction());
+     mvIncommingWorkflow.put(Tag.CHECKUSERNAME, new CheckUserName());
      mvIncommingWorkflow.put(Tag.CHECKSESSION_ACTION, new CheckSesionAction());
      mvIncommingWorkflow.put(Tag.TYPELOCATION_ACTION, new TypeLocationAction());
      mvIncommingWorkflow.put(Tag.TYPEPLACE_ACTION, new TypePlaceAction());

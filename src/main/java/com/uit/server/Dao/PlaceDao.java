@@ -19,11 +19,11 @@ public class PlaceDao extends BaseDao {
   public List SearchPlaceByName(PlaceRequestBean pvPlaceRequestBean, int idplace) {
     List Result = new Vector();
 
-    String strSql = "SELECT PL.ID AS IDPLACE," + " PL.NAME AS NAMEPLACE, PL.IDTYPEPLACE, " + "PL.DECRIPSION,PL.PHONENUMBER, PL.EMAIL, LO.LOCATIONX, "
-        + "LO.ID AS IDLOCATION, GR.DESCRIPTION AS NAMETYPEPLACE, " + "LO.LOCATIONY, LO.IDTYPEPLACE AS IDTYPELOCATION ,"
+    String strSql = "SELECT PL.ID AS IDPLACE," + " PL.NAME AS NAMEPLACE, PL.IDGROUPPLACE AS IDTYPEPLACE, " + "PL.DECRIPSION,PL.PHONENUMBER, PL.EMAIL, LO.LOCATIONX, "
+        + "LO.ID AS IDLOCATION, GR.DESCRIPTION AS NAMETYPEPLACE, " + "LO.LOCATIONY, LO.IDGROUP AS IDTYPELOCATION ,"
         + " LO.IDGROUP AS IDGROUPLOCATION , " + "GRLO.NAMEGR AS NAMEGROUPLOCATION" + "  FROM "
         + "PLACE PL INNER JOIN groupplace GR ON (PL.IDGROUPPLACE = GR.ID) " + " INNER JOIN LOCATION LO ON (PL.IDLOCATION = LO.ID) "
-        + " INNER JOIN GROUPLOCATION GRLO ON (LO.IDGROUP = GRLO.ID) " + "" + " WHERE  ";
+        + " INNER JOIN GROUPLOCATION GRLO ON (LO.IDGROUP = GRLO.ID) " + "" + " WHERE 1 ";
     if (!pvPlaceRequestBean.getNamePlace().equals("")) {
       strSql += " AND PL.NAME LIKE '%" + pvPlaceRequestBean.getNamePlace() + "%' ";
     }

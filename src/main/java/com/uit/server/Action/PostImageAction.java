@@ -24,7 +24,6 @@ public class PostImageAction extends BaseAction {
 
   @Override
   public void ProcessTxn() {
-    // TODO Auto-generated method stub
     
   }
   

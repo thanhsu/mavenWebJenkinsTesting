@@ -34,7 +34,7 @@ public class SearchPlaceAction extends BaseAction {
 
     JsonObject json = this.mvRoutinContext.getBodyAsJson();
     mvPlaceName = json.getString("KeyWord") != null ? json.getString("KeyWord") : "";
-    mvSessionID = json.getString("UserID");
+    mvSessionID = json.getInteger("UserID").toString();
     mvIDTypePlace = json.getInteger("IDTypePlace") != null ? json.getInteger("IDTypePlace") : 0;
     mvLocationX = json.getFloat("LocationX") != null ? json.getFloat("LocationX") : 0;
     mvLocationY = json.getFloat("LocationY") != null ? json.getFloat("LocationY") : 0;
@@ -54,7 +54,7 @@ public class SearchPlaceAction extends BaseAction {
       ReturnValue = new ResultBean(0, "Những địa điểm phù hợp", result);
     }
 
-    this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json").end(Json.encodePrettily(ReturnValue));
+    this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8").end(Json.encodePrettily(ReturnValue));
   }
 
 }

@@ -5,6 +5,7 @@ public class Tag {
   //Define Action Token
   public static String LOGIN_ACTION = "DoLogin.Action";
   public static String RIGISTER_ACTION = "DoRegister.Action";
+  public static String CHECKUSERNAME ="DoCheckUserName.Action";
   public static String GETUSERINFO= "DoGetUserInfo.Action";
   public static String UPDATEAVATAR= "DoUpdateAvatar.Action";
   public static String FOLLOWUSER ="DoFollowUser.Action";
