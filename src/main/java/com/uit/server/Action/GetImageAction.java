@@ -39,7 +39,7 @@ public class GetImageAction extends BaseAction {
     if (mvfile != null) {
       this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_ENCODING, HttpHeaders.IDENTITY).sendFile(pvFile.getAbsolutePath());
     }else {
-      this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json").end("Không tìm thấy hình ảnh!");
+      this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8").end("Không tìm thấy hình ảnh!");
     }
   }
 

@@ -19,7 +19,7 @@ public class LoginAction extends BaseAction {
   public void ProcessTxn() {
     mvUsername = this.mvRoutinContext.getBodyAsJson().getString("UserName");
     mvPassword = this.mvRoutinContext.getBodyAsJson().getString("Password");
-    mvToken = this.mvRoutinContext.getBodyAsJson().getString("Token");
+    mvToken = "876876786";
     
     loginBLM mvBLM = new loginBLM(mvUsername, mvPassword);
       mvBLM.DoDao();

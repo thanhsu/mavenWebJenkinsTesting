@@ -24,7 +24,7 @@ public class BaseDao {
   public BaseDao() {
     this.userName = "root";
     this.password = "";
-    this.serverName = "http://103.252.0.86";
+    this.serverName = "localhost";
     this.dbms = "mysql";
     this.portNumber = "3306";
     this.dbName = "socialplace";

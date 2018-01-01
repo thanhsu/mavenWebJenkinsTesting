@@ -35,9 +35,9 @@ public class PostReviewAction extends BaseAction {
     
    int result= mvCreateReviewBLM.CreateNewReview(idUser, idPlace, idFeel, listImage, Caption, Detail);
     if(result!=0) {
-      this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json").end(Json.encodePrettily(new ResultNonDataBean(1, "Create New Review Sucess", result+"")));
+      this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8").end(Json.encodePrettily(new ResultNonDataBean(1, "Create New Review Sucess", result+"")));
     }else {
-      this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json").end(Json.encodePrettily(new ResultNonDataBean(1, "Create New Review Fail", "Error")));
+      this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8").end(Json.encodePrettily(new ResultNonDataBean(1, "Create New Review Fail", "Error")));
     }
   }
   

@@ -15,6 +15,7 @@ import com.uit.server.Action.FollowUserAction;
 import com.uit.server.Action.GetPostAction;
 import com.uit.server.Action.LikePlaceAction;
 import com.uit.server.Action.LoginAction;
+import com.uit.server.Action.NewPlaceAction;
 import com.uit.server.Action.PlaceCommentAction;
 import com.uit.server.Action.PlaceDetailAction;
 import com.uit.server.Action.PlaceReviewCommentAction;
@@ -54,7 +55,9 @@ public class DBVerticle extends AbstractVerticle {
      
      mvIncommingWorkflow.put(Tag.PLACEDETAIL_ACTION, new PlaceDetailAction());
      
+     
     // mvIncommingWorkflow.put(Tag.PLACECOMMENT_ACTION, )
+     mvIncommingWorkflow.put(Tag.NEWPLACE_ACTION, new NewPlaceAction());
      mvIncommingWorkflow.put(Tag.DOLIKEPOST, new DoLikeStatusAction());
      mvIncommingWorkflow.put(Tag.PLACECOMMENT_ACTION, new PlaceCommentAction());
      mvIncommingWorkflow.put(Tag.PLACELIKE_ACTION, new LikePlaceAction());

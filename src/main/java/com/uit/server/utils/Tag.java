@@ -24,6 +24,7 @@ public class Tag {
   public static String SEARCHPLACE_ACTION="DoSearchPlace.Action";
   public static String PLACEDETAIL_ACTION = "PlaceDetail.Action";
   
+  public static String NEWPLACE_ACTION = "NewPlace.Action";
   public static String PLACECOMMENT_ACTION= "PlaceComment.Action";
   public static String PLACELIKE_ACTION = "PlaceLike.Action";
   public static String PLACEREVIEW_ACTION = "PlaceReview.Action";
@@ -31,7 +32,7 @@ public class Tag {
   public static String PLACEREVIEWCOMMENT_ACTION ="PlacereviewComment.Action";
   
   
-  public static String TYPELOCATION_ACTION = "GetTypeLocaton.Action";
+  public static String TYPELOCATION_ACTION = "GetTypeLocation.Action";
   public static String TYPEPLACE_ACTION = "GetTypePlace.Action";
   
   

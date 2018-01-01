@@ -17,7 +17,7 @@ public class TypePlaceAction extends BaseAction {
   public void ProcessTxn() {
     TypePlaceBLM mvTypePlaceBLM = new TypePlaceBLM();
     ResultBean Result = new ResultBean(1, "Danh sách loại địa điểm.", mvTypePlaceBLM.AllTypePlace());
-    this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json").end(Json.encodePrettily(Result));    
+    this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8").end(Json.encodePrettily(Result));    
   }
 
     

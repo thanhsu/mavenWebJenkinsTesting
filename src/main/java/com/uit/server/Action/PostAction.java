@@ -34,7 +34,7 @@ public class PostAction extends BaseAction {
     mvPostBLM = new PostBLM();
     Object[] result = new Object[1];
    result[0]= mvPostBLM.PostStatus(UserID, PostDetail, lstImage, this.FeelID);
-   this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json").end(Json.encodePrettily(new ResultBean(1, "Lưu Status Thành Công",  result)));
+   this.mvRoutinContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8").end(Json.encodePrettily(new ResultBean(1, "Lưu Status Thành Công",  result)));
   }
   
   @Override

@@ -10,10 +10,6 @@ import io.vertx.ext.web.RoutingContext;
 
 public class NewPlaceAction extends BaseAction {
 
-  public NewPlaceAction(RoutingContext rtContext) {
-    this.setMvRoutinContext(rtContext);
-  }
-
   @Override
   public void ParseRequestBean() {
     NewPlaceRequestBean lvNewPlaceRequestBean = new NewPlaceRequestBean();
@@ -22,9 +18,9 @@ public class NewPlaceAction extends BaseAction {
     lvNewPlaceRequestBean.setLocationX(json.getFloat("LocationX"));
     lvNewPlaceRequestBean.setLocationY(json.getFloat("LocationY"));
     lvNewPlaceRequestBean.setIDGroupPlace(json.getInteger("IDGroupLocation"));
-    lvNewPlaceRequestBean.setNameGroupPlace(json.getString("NameGroupLocation"));
+  //  lvNewPlaceRequestBean.setNameGroupPlace(json.getString("NameGroupLocation"));
     lvNewPlaceRequestBean.setIDTypePlace(json.getInteger("IDTypePlace"));
-    lvNewPlaceRequestBean.setNameTypePlace(json.getString("NameTypePlace"));
+    //lvNewPlaceRequestBean.setNameTypePlace(json.getString("NameTypePlace"));
     lvNewPlaceRequestBean.setNote(json.getString("Description"));
     lvNewPlaceRequestBean.setPhoneNumber(json.getString("PhoneNumber"));
     lvNewPlaceRequestBean.setEmail(json.getString("Email"));
